@@ -1,0 +1,734 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Clothes only for you</title>
+
+	<!-- Favicons -->
+  <link href="{% static 'img/favicon.png'%}" rel="icon">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,
+	wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+	<!-- Bootstrap CSS -->
+	<link href="{% static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+
+	<!-- Template Main CSS File -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+
+</head>
+
+<body>
+
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light p-0" style="background-color: black; height: 60px;">
+      <div class="container-fluid px-1 align-items-center">
+          <div class="navbar-brand px-5 py-0 m-0 h1">
+            <a class="navbar-brand" href="{% url 'main' %}" style="color:white;">
+              <img src="{% static 'img/logo-removebg-preview.png' %}" height="60px" width="auto">
+            </a>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <a class="nav-link" href="{% url 'list_items' 1 %}"
+               role="button" style="color: white;">
+              Мужская одежда
+            </a>
+            <a class="nav-link" href="{% url 'list_items' 2 %}" role="button" style="color: white;">
+                Женская одежда
+            </a>
+          </div>
+          <!-- Only for sign in Users -->
+          {% if request.user.is_authenticated %}
+          <p>Добро пожаловать, {{ user.username }} <a class="btn" href="{% url 'logout' %}"
+               type="button" style="color:white; border-color:white; margin-left: 10px;">Выйти</a></p>
+          {% else %}
+          <div class="navbar-brand pe-3 m-0 h1">
+            <a class="btn btn-outline-success" href="{% url 'sign_in' %}"
+               type="button" style="color:#5fc700; border-color:#5fc700;">Войти</a>
+          </div>
+          {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container-fluid d-flex my-2 px-2">
+      <!-- Filter side-bar -->
+      {% block filter %}
+      <div class="list-filter">
+        <div class="name my-2">Мужчины</div>
+        <div class="main-filters">
+          <div class="accordion" id="Mans">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Одежда
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                   data-bs-parent="#Mans">
+                <div class="accordion-body accordion-mans-list align-items-left">
+                  <!-- Url to another model (replace name of Model if u have another models) -->
+                  <li>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 4 %}" class="col">Куртки и ветровки</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 1 %}" class="col">Толстовки</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 2 %}" class="col">Футболки</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 3 %}" class="col">Рубашки</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 5 %}" class="col">Джинсы</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 6 %}" class="col">Брюки</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 7 %}" class="col">Шорты</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 8 %}" class="col">Спортивная одежда</a>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Обувь
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                   data-bs-parent="#Mans">
+                <div class="accordion-body accordion-mans-list align-items-left">
+                  <li>
+                    <!-- Url to another model (replace name of Model if u have another models) -->
+                    <a href="{% url 'list_items_filter_models' main_category.pk 9 %}" class="col">Кроссовки</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 10 %}" class="col">Ботинки</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 11 %}" class="col">Туфли</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 12 %}" class="col">Сандали</a>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                  Аксессуары
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                   data-bs-parent="#Mans">
+                <div class="accordion-body accordion-mans-list align-items-left">
+                  <li>
+                    <!-- Url to another model (replace name of Model if u have another models) -->
+                    <a href="{% url 'list_items_filter_models' main_category.pk 13 %}" class="col">Ремни</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 14 %}" class="col">Сумки</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 15 %}" class="col">Очки</a>
+                    <a href="{% url 'list_items_filter_models' main_category.pk 16 %}" class="col">Украшения</a>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="namespace-filter-list my-2">Фильтр</div>
+        <div class="accordion" id="Filter">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFilterOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseFilterOne" aria-expanded="true" aria-controls="collapseFilterOne">
+                По цене
+              </button>
+            </h2>
+            <div id="collapseFilterOne" class="accordion-collapse collapse" aria-labelledby="headingFilterOne"
+                 data-bs-parent="#Filter">
+              <div class="accordion-body accordion-mans-list align-items-left" style="text-align: center;">
+                <a class="btn btn-secondary" href="{% url 'list_items_price_filter_asc' main_category.pk items_model.id %}"
+                   role="button">По возрастанию</a>
+                <a class="btn btn-secondary" href="{% url 'list_items_price_filter_desc' main_category.pk items_model.id %}"
+                   role="button">По убыванию</a>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFilterTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseFilterTwo" aria-expanded="false" aria-controls="collapseFilterTwo">
+                По популярности
+              </button>
+            </h2>
+            <div id="collapseFilterTwo" class="accordion-collapse collapse" aria-labelledby="headingFilterTwo"
+                 data-bs-parent="#Filter">
+              <div class="accordion-body accordion-mans-list align-items-left" style="text-align: center;">
+                <a class="btn btn-secondary" href="{% url 'list_items_views_asc' main_category.pk items_model.id %}"
+                   role="button">Популярные</a>
+                <a class="btn btn-secondary" href="{% url 'list_items_views_desc' main_category.pk items_model.id %}"
+                   role="button">Не популярные</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endblock %}
+      {% block models %}
+      <div class="main-window">
+        <div class="name-category-main d-flex justify-content-between" style="text-align:center;">
+          <h3 class="mx-2">{{ items_model.name_model }}</h3>
+          <!-- Button for only Superuser -->
+          {% if request.user.is_superuser %}
+          <div class="button" style="text-align: center;"><a class="btn btn-primary" href="{% url 'add' %}"
+                                                             role="button">Добавить вещь</a></div>{% endif %}
+        </div>
+        <!-- View items only if category in url(Man) -->
+        {% if main_category.pk == 1 %}
+        <div class="card-flex-main d-flex flex-wrap" style="justify-content: center;">
+          <!-- View items only if model in url -->
+          {% if items_model.pk == 1 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 19rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong class="price"> {{ items.price }} RUB </strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 2 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 3 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 4 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 5 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 6 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 7 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 8 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 9 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 10 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 11 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 12 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 13 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 14 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 15 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 16 %}
+          {% for items in items_mans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong data-price="{{ items.price }}">{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        {% endif %}
+
+        <!-- View items only if category in url(Woman) -->
+        {% if main_category.pk == 2 %}
+        <div class="card-flex-main d-flex flex-wrap" style="justify-content: center;">
+          <!-- View items only if model in url -->
+          {% if items_model.pk == 1 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 19rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong class="price"> {{ items.price }} RUB </strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 2 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 3 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 4 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 5 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 6 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 7 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 8 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 9 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 10 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 11 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 12 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 13 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 14 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 15 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong>{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% if items_model.pk == 16 %}
+          {% for items in items_womans %}
+          <div class="card ms-3 my-2" style="width: 18rem;">
+            <a href="{% url 'detail_items' items.pk %}"><img class="card-img-top" src="{% if items.image %}
+            {{ items.image.url }}{% else %}#{% endif %}"
+                             height="440" width="293" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="h6">
+                <a href="{% url 'detail_items' items.pk %}" class="name-item-list-items">{{ items.name }}</a>
+              </p>
+              <strong data-price="{{ items.price }}">{{ items.price }} RUB</strong>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        {% endif %}
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+  </main>
+
+  <footer class="p-3 mt-2 mx-2 rounded" style="background-color: #000000;">
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="{% static 'img/main-hacker.png'%}" alt="" width="auto" height="100">
+            <small class="d-block mb-3 text-muted">Created by Ilya Shtoler</small>
+          </div>
+          <div class="col-6 col-md">
+            <h5 class="pb-3" style="color: #fff;">Ссылки</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="link-footer" href="#">GitHub</a></li>
+              <li><a class="link-footer" href="#">Facebook</a></li>
+              <li><a class="link-footer" href="#">Linkedin</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
+
+	<!-- Vendor JS Files -->
+  <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+  <script src="{% static 'bootstrap/js/jquery-3.6.0.min.js'%}"></script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Clothes only for you</title>
+
+	<!-- Favicons -->
+  <link href="{% static 'img/favicon.png'%}" rel="icon">
+	
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,
+	wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+	<!-- Bootstrap CSS -->
+	<link href="{% static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+
+	<!-- Template Main CSS File -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+
+</head>
+
+<body>
+	
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light p-0" style="background-color: black; height: 60px;">
+      <div class="container-fluid px-1 align-items-center">
+          <div class="navbar-brand px-5 py-0 m-0 h1">
+            <a class="navbar-brand" href="{% url 'main' %}" style="color:white;">
+              <img src="{% static 'img/logo-removebg-preview.png' %}" height="60px" width="auto">
+            </a>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <a class="nav-link" href="{% url 'list_items' 1 %}"
+               role="button" style="color: white;">
+              Мужская одежда
+            </a>
+            <a class="nav-link" href="{% url 'list_items' 2 %}" role="button" style="color: white;">
+                Женская одежда
+            </a>
+          </div>
+          <!-- Only for sign in Users -->
+          {% if request.user.is_authenticated %}
+          <p>Добро пожаловать, {{ user.username }} <a class="btn" href="{% url 'logout' %}"
+               type="button" style="color:white; border-color:white; margin-left: 10px;">Выйти</a></p>
+          {% else %}
+          <div class="navbar-brand pe-3 m-0 h1">
+            <a class="btn btn-outline-success" href="{% url 'sign_in' %}"
+               type="button" style="color:#5fc700; border-color:#5fc700;">Войти</a>
+          </div>
+          {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h3 class="mx-2 my-4" style="text-align: center;">Корзина</h3>
+    <div class="container-fluid d-flex my-2 px-2">
+      <div class="cart-window">
+        <div class="cart-item d-flex flex-wrap" style="border-top: 1px solid;">
+          <!-- View all Cart items -->
+          {% for i in cart_items %}
+          <div class="cart mx-2 my-2" style="height: 300px;">
+            <a href="#"><img class="cart-img" src="{{ i.image }}" height="auto" width="200px"
+                             alt="Card image cap"></a>
+          </div>
+          <div class="info-cart-item d-flex justify-content-between" style="width: 70%;">
+            <div class="header-cart-info my-4 mx-0" style="width: 65%; height: 50px;">
+              <strong>{{ i.name }}</strong>
+              <p>{{ i.price }} RUB</p>
+              <div class="info-db-cart mb-2" style="margin-top: 50px;">
+                <p>№ арт: {{ i.id }} &nbsp;&nbsp;&nbsp;&nbsp; Цвет:{{ i.color }}</p>
+                <!-- View only acceptable sizes -->
+                <p>Размер: {% if i.size_xs == True %}XS{% endif %}{% if i.size_s == True %}S{% endif %}
+                    {% if i.size_m == True %}M{% endif %}{% if i.size_l == True %}L{% endif %}
+                    {% if i.size_xl == True %}XL{% endif %}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Итого: {{ i.price }} RUB</p>
+              </div>
+              <div class="dropdown" style="text-align: left;">
+                <button class="btn btn-secondary dropdown-toggle" type="button"
+                        id="dropdownMenuButtonCart" data-bs-toggle="dropdown" aria-expanded="false" style="width: 160px;">
+                  Кол-во
+                </button>
+                <!-- Not working -->
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonCart" style="text-align: center;">
+                  <li><a class="dropdown-item" href="#">1</a></li>
+                  <li><a class="dropdown-item" href="#">2</a></li>
+                  <li><a class="dropdown-item" href="#">3</a></li>
+                  <li><a class="dropdown-item" href="#">4</a></li>
+                  <li><a class="dropdown-item" href="#">5</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="trash-can my-4 mx-0">
+                 <!-- Form for delete item from Cart objects -->
+                <form method="POST" action="/delete/{{ i.pk }}/">
+                   {% csrf_token %}
+                    <button type="submit" value="DELETE"><img
+                            src="{% static 'img/trashcan.png'%}" height="30"></button>
+                </form>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="info-buy-cart ms-2" style="background-color: #fff8df; height: auto; width:29%;">
+          <h4 class="mx-2 my-2" style="text-align: center;">Итого</h4>
+          <div class="body-cart-buy d-flex flex-wrap justify-content-between m-4">
+            <!-- Sum of all Cart objects -->
+            <p>Стоимость заказа</p><p>{{ sum_price.price__sum }} RUB</p>
+            <p>Доставка</p><p>199 RUB</p>
+          </div>
+          <div class="final-price d-flex justify-content-between m-4">
+            <!-- Final Sum -->
+            <p>Итого к оплате: </p> <p><strong>{{ sum_price.price__sum|add:199 }} RUB</strong></p>
+          </div>
+          <div class="container-fluid" id="order-buy" style="text-align: center;">
+            <a href="#"><button type="button" class="btn btn-dark">Оформить заказ</button></a>
+          </div>
+        </div>
+    </div>
+  </main>
+
+  <footer class="p-3 mt-2 mx-2 rounded" style="background-color: #000000;">
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="{% static 'img/main-hacker.png'%}" alt="" width="auto" height="100">
+            <small class="d-block mb-3 text-muted">Created by Ilya Shtoler</small>
+          </div>
+          <div class="col-6 col-md">
+            <h5 class="pb-3" style="color: #fff;">Ссылки</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="link-footer" href="#">GitHub</a></li>
+              <li><a class="link-footer" href="#">Facebook</a></li>
+              <li><a class="link-footer" href="#">Linkedin</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
+
+	<!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+          integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+          crossorigin="anonymous"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+
+</body>
+</html>

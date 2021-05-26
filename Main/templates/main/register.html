@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Clothes only for you</title>
+
+  <!-- Favicons -->
+  <link href="{% static 'img/favicon.png'%}" rel="icon">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,
+  wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+
+</head>
+
+<body>
+  
+  <header>
+    <nav class="navbar navbar-light p-0" style="background-color: black; height: 60px;">
+      <div class="container-fluid px-1 align-items-center justify-content-center">
+        <div class="navbar-brand px-5 py-0 m-0 h1">
+          <a class="navbar-brand" href="{% url 'main' %}" style="color:white;">
+            <img src="{% static 'img/logo-removebg-preview.png'%}" height="60px" width="auto">
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="bg-img-block" style="height:770px; background-image: url({% static 'img/bg-register.jpg'%})">
+      <div class="block-register">
+        <form class="py-3 px-3" method="POST">
+          <!-- Form for register -->
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            {% if form.email.errors %}
+                <div class="alert alert-danger" role="alert">
+                  Email не корректен
+                </div>
+            {% endif %}
+            {{ form.email }}
+          </div>
+          <div class="form-group">
+            <label for="exampleInputNickname">Имя пользователя</label>
+            {% if form.username.errors %}
+                <div class="alert alert-danger" role="alert">
+                  Пользователь с таким именем уже существует
+                </div>
+            {% endif %}
+            {{ form.username }}
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Пароль</label>
+            {% if form.password1.errors %}
+                <div class="alert alert-danger" role="alert">
+                  Пароль не корректен
+                </div>
+            {% endif %}
+            {{ form.password1 }}
+            <small id="passwordHelpInline" class="text-muted mt-4">
+              <li>8-20 символов в длину.</li>
+              <li>Используйте буквы и цифры</li>
+              <li>Не используйте пароль от других ваших ресурсов</li>
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Подтвердите пароль</label>
+            {% if form.password2.errors %}
+                 <div class="alert alert-danger" role="alert">
+                  Пароль не корректен
+                </div>
+            {% endif %}
+            {{ form.password2 }}
+          </div>
+          <button type="submit" class="btn btn-primary mt-4">Регистрация</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+
+
+</body>
+</html>

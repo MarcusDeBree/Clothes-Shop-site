@@ -1,0 +1,629 @@
+/** Main !IMPORTANT **/
+
+body {
+	font-family: 'Playfair Display', sans-serif;
+}
+
+body > header > nav > div > p {
+    color: white;
+    text-align: center;
+    align-items: center;
+    margin: 0;
+    margin-right: 20px;
+}
+
+
+/** Footer main **/
+
+a.link-footer {
+	color: white;
+	text-decoration: none;
+}
+
+a.link-footer:hover {
+	color: white;
+	text-decoration: underline;
+}
+
+
+/** Flip image main **/
+
+.flip-box {
+  background-color: transparent;
+  width: 467px;
+  height: 700px;
+  perspective: 1000px; 
+}
+
+.flip-box-inner {
+  position: relative;
+  width: 467px;
+  height: 700px;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-box-front, .flip-box-back {
+  position: absolute;
+  width: 467px;
+  height: 700px;
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden;
+}
+
+.flip-box-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-box-back {
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 8%, rgba(250,255,206,1) 100%);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.flip-box-back-man {
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 8%, rgba(128,167,249,1) 100%);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+
+/** Register **/
+
+.block-register {
+  text-align: center;
+  height: 84%;
+  width: 470px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0;
+  position: absolute;
+  left: 32%;
+  top: 50%;
+  transform: translate(0, -50%) }
+
+div.bg-img-block {
+   height: 10em;
+   background-size: cover;
+   position: relative }
+
+body > main > div > div > form > div {
+   display: grid;
+   margin-top: 15px;
+}
+
+body > main > div > div > form > div > label {
+   margin-bottom: 15px;
+}
+
+/** Sign in **/
+
+.btn-sign-up {
+   color: black;
+   background-color: white;
+   border-color: black;
+   box-shadow: none;
+}
+
+.btn-sign-up:hover {
+   background-color: #ececec;
+}
+
+.btn-sign-up:active {
+   background-color: #a2a2a2;
+}
+
+.btn-sign-in {
+   color: black;
+   background-color: #47e91e;
+   border-color: black;
+   box-shadow: none;
+}
+
+.btn-sign-in:hover {
+   background-color: #30c50a;
+   color: black
+}
+
+.btn-sign-in:active {
+   background-color: #25a206;
+}
+
+.block-sign-in {
+  text-align: center;
+  height: 37%;
+  width: 470px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0;
+  position: absolute;
+  left: 32%;
+  top: 50%;
+  transform: translate(0, -50%) }
+
+div.bg-img-block {
+   height: 10em;
+   background-size: cover;
+   position: relative }
+
+/** List_items **/
+
+.list-filter {
+  width: 200px; 
+  height: 963px; 
+  background-color: #d8d8d8;
+  margin-right: 5px;
+  border-radius: 5px;
+  text-align:center;
+}
+
+.main-window {
+  width: auto;  
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+div.name-category-main.d-flex.justify-content-between > div > form > button {
+  box-shadow: none;
+  color: black;
+  background-color: #f3f3f3;
+  border-color: black
+}
+
+div.name-category-main.d-flex.justify-content-between > div > form > button:hover {
+  background-color: #dedede;
+}
+
+div.name-category-main.d-flex.justify-content-between > div > form > button:active {
+  background-color: #848484;
+}
+
+
+/* Setting to collapse filters */
+
+#collapseOne > div > li {
+  display: grid;
+  padding: 0;
+}
+
+#collapseTwo > div > li {
+  display: grid;
+  padding: 0;
+}
+
+#collapseThree > div > li {
+  display: grid;
+  padding: 0;
+}
+
+#collapseFour > div > li {
+  display: grid;
+  padding: 0;
+}
+
+#collapseOne > div > li > a {
+  border: 1px solid;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  background-color: gainsboro;
+  width: 130px;
+}
+
+#collapseTwo > div > li > a {
+  border: 1px solid;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  background-color: gainsboro;
+  width: 130px;
+}
+
+#collapseThree > div > li > a {
+  border: 1px solid;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  background-color: gainsboro;
+  width: 130px;
+}
+
+#collapseFour > div > li > a {
+  border: 1px solid;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  background-color: gainsboro;
+  width: 130px;
+}
+
+#headingOne > button {
+  color: black;
+  background-color: #ffffff;
+}
+
+#headingTwo > button {
+  color: black;
+  background-color: #ffffff;
+}
+
+#headingThree > button {
+  color: black;
+  background-color: #ffffff;
+}
+
+#headingFour > button {
+  color: black;
+  background-color: #ffffff;
+}
+
+#headingFilterOne > button {
+  color: black;
+  background-color: #ffffff;
+}
+
+#headingFilterTwo > button {
+  color: black;
+  background-color: #ffffff;
+}
+
+#headingFilterThree > button {
+  color: black;
+  background-color: #ffffff;
+}
+
+#headingFilterFour > button {
+  color: black;
+  background-color: #ffffff;
+}
+
+.accordion-mans-list {
+  text-align: left;
+  list-style-type: none;
+}
+
+.accordion-header:active {
+  color: black;
+  text-decoration:none;
+}
+
+.accordion-button:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #cee8ff;
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image:none;
+}
+
+.accordion-button::after {
+  background-image: none;
+}
+
+#collapseFilterThree > div > a {
+  margin-bottom: 10px;
+}
+
+#collapseFilterTwo > div > a {
+  margin-bottom: 10px;
+}
+
+#collapseFilterOne > div > a {
+  margin-bottom: 10px;
+}
+
+/* Pagination */
+
+.page-link {
+  color: black;
+  background-color: #fff;
+  border: 2px solid #fff;
+}
+
+.page-link:hover {
+  color: #9c9c9c;
+}
+
+body > main > div > div.main-window > div.pagi-nation > ul {
+  justify-content: center;
+}
+
+.name-item-list-items {
+  color:black;
+  text-decoration:none;
+}
+
+.name-item-list-items:hover {
+  color:black;
+  text-decoration:underline;
+}
+
+/** Detail_items **/
+
+.main-window {
+  width: auto;  
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.buy-info {
+  width: 100%;  
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  height: fit-content;
+  position: sticky;
+  top: 0px;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > input {
+}
+
+body > main > div > div > div > img {
+  border-radius: 5px;
+}
+
+.w3-sidebar {
+  width: 300px;
+  top:0;
+}
+
+#mySidebar > button {
+  text-align:center;
+}
+
+body > main > div > div > div.side-bar {
+  width: 686px;
+  text-align: center;
+}
+
+.w3-teal, .w3-hover-teal:hover {
+  background-color: #d4d4d4!important;
+}
+
+div.side-bar > div.w3-teal {
+  display: flex;
+  justify-content: space-evenly;
+  border-radius:5px;
+}
+
+div.side-bar > div.w3-teal > button {
+  width: 100%;
+}
+
+.main-detail {
+  text-align: left;
+  font-weight: bold;
+  font-size: large;
+  margin: 10px;
+}
+
+#details > p.detail-info {
+  text-align: left;
+  font-size: large;
+  margin: 10px;
+}
+
+#history > p.detail-info {
+  text-align: left;
+  font-size: large;
+  margin: 10px;
+}
+
+/* Buy-info */
+
+div.buy-info.mx-2 > div > a:active {
+  border: 1px solid black;
+}
+
+body > main > div > div.buy-info.mx-2 > h3.my-4 {
+  text-align: center;
+  font-family: 'Playfair Display';
+  font-size: x-large;
+}
+
+body > main > div > div.buy-info.mx-2 > h3:nth-child(4) {
+  font-family: 'Playfair Display';
+  font-size: x-large;
+  font-weight: bold;
+}
+
+#dropdownMenuButtonDetail {
+  width: 80%;
+  height: 50px;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul {
+  left: 0%;
+  width: 80%;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul > li > a {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul > li > a:active {
+  color: black;
+  background-color: #9c9c9c;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  text-decoration: none;
+  background-color: #9c9c9c;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > button {
+  width: 80%;
+  height: 50px;
+}
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul > li > a > input[type=checkbox] {
+  width: 100%;
+  opacity:0;
+  height: 20px;
+}
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul > li:nth-child(1) > a > p {
+  position:absolute;
+  top: 5px;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul > li:nth-child(2) > a > p {
+  position:absolute;
+  top: 30px;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul > li:nth-child(3) > a > p {
+  position:absolute;
+  top: 55px;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul > li:nth-child(4) > a > p {
+  position:absolute;
+  top: 81px;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul > li:nth-child(5) > a > p {
+  position:absolute;
+  top: 105px;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > div > ul > li {
+  height: 25px;
+}
+
+body > main > div > div.buy-info.mx-2 > div.container-fluid > div > form > input {
+  display:none;
+}
+
+/** Favourites **/
+
+.favourites-window {
+  width: 100%;
+  background-color: #d4d4d4;
+  border-radius: 5px;
+}
+
+/** Cart **/
+
+.cart-window {
+  width: 70%;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+body > main > div > div.cart-window > div > div.info-cart-item.d-flex.justify-content-between >
+div.trash-can.my-4.mx-0 > form > button {
+  border: none;
+  background-color: #f9f9f9;
+}
+
+div.trash-can {
+  width: 10%;
+  text-align: center;
+}
+
+div.header-cart-info.my-4.mx-0 > div.dropdown {
+  margin-top: 84px;
+}
+
+body > main > div > div.info-buy-cart.ms-2 > div.body-cart-buy.d-flex.flex-wrap.justify-content-between.m-4 {
+  border-top: 1px solid;
+  border-bottom: 2px solid;
+  padding: 20px;
+  padding-bottom: 0px;
+}
+
+#order-buy > a > button {
+  width:93%;
+}
+
+/** Add **/
+
+body > main > .form-add {
+  width: 40%;
+  border-color: black;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  text-align: center;
+}
+
+body > main > div > div > form > p {
+  display: grid;
+}
+
+body > main > div > div > form > p > input {
+  text-align:center ;
+}
+
+body > main > div > div > form > p:nth-child(5) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body > main > div > div > form > p:nth-child(6) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body > main > div > div > form > p:nth-child(7) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body > main > div > div > form > p:nth-child(8) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body > main > div > div > form > p:nth-child(9) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body > main > div > div > form > p:nth-child(5) > label {
+  padding:10px;
+}
+
+body > main > div > div > form > p:nth-child(6) > label {
+  padding:10px;
+}
+
+body > main > div > div > form > p:nth-child(7) > label {
+  padding:10px;
+}
+
+body > main > div > div > form > p:nth-child(8) > label {
+  padding:10px;
+}
+
+body > main > div > div > form > p:nth-child(9) > label {
+  padding:10px;
+}

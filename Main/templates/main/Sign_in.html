@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Clothes only for you</title>
+
+  <!-- Favicons -->
+  <link href="{% static 'img/favicon.png'%}" rel="icon">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,
+  wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+
+</head>
+
+<body>
+  
+  <header>
+    <nav class="navbar navbar-light p-0" style="background-color: black; height: 60px;">
+      <div class="container-fluid px-1 align-items-center justify-content-center">
+        <div class="navbar-brand px-5 py-0 m-0 h1">
+          <a class="navbar-brand" href="{% url 'main' %}" style="color:white;">
+            <img src="{% static 'img/logo-removebg-preview.png'%}" height="60px" width="auto">
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="bg-img-block" style="height:770px; background-image: url({% static 'img/bg-register.jpg'%})">
+      <div class="block-sign-in">
+        <form class="py-3 px-3" method="POST">
+          <!-- Form for Sign in -->
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-sign-in px-3 mx-2">Войти</button>
+          <a class="btn btn-sign-up mx-2" href="{% url 'register' %}" role="button">Регистрация</a>
+        </form>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+
+
+</body>
+</html>

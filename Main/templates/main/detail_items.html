@@ -1,0 +1,228 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Clothes only for you</title>
+
+	<!-- Favicons -->
+    <link href="{% static 'img/favicon.png'%}" rel="icon">
+	
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+	<!-- CSS -->
+	<link href="{% static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/w3.css'%}">
+
+
+	<!-- Template Main CSS File -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+
+</head>
+
+<body>
+	
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light p-0" style="background-color: black; height: 60px;">
+      <div class="container-fluid px-1 align-items-center">
+          <div class="navbar-brand px-5 py-0 m-0 h1">
+            <a class="navbar-brand" href="{% url 'main' %}" style="color:white;">
+              <img src="{% static 'img/logo-removebg-preview.png' %}" height="60px" width="auto">
+            </a>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <a class="nav-link" href="{% url 'list_items' 1 %}"
+               role="button" style="color: white;">
+              Мужская одежда
+            </a>
+            <a class="nav-link" href="{% url 'list_items' 2 %}" role="button" style="color: white;">
+                Женская одежда
+            </a>
+          </div>
+          <!-- Only for sign in Users -->
+          {% if request.user.is_authenticated %}
+          <p>Добро пожаловать, {{ user.username }} <a class="btn" href="{% url 'logout' %}"
+               type="button" style="color:white; border-color:white; margin-left: 10px;">Выйти</a></p>
+          {% else %}
+          <div class="navbar-brand pe-3 m-0 h1">
+            <a class="btn btn-outline-success" href="{% url 'sign_in' %}"
+               type="button" style="color:#5fc700; border-color:#5fc700;">Войти</a>
+          </div>
+          {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container-fluid d-flex my-2 px-0">
+      <div class="main-window">
+        {% block detail_items %}
+        {% if get_item %}
+        <div class="side-bar">
+          <!-- Information bar -->
+          <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="details">
+            <button onclick="w3_close_detail()" class="w3-bar-item w3-large">Подробнее &times;</button>
+            <p class="main-detail">Модель</p>
+            <p class="detail-info">{{ get_item.model }}</p>
+            <p class="main-detail">Состав</p>
+            <p class="detail-info">{{ get_item.materials }}</p>
+            <p class="main-detail">Цвет</p>
+            <p class="detail-info">{{ get_item.color }}</p>
+            <p class="main-detail">Страна-производитель</p>
+            <p class="detail-info">{{ get_item.country_create }}</p>
+          </div>
+          <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="delivery">
+            <button onclick="w3_close_delivery()" class="w3-bar-item w3-large">Доставка &times;</button>
+            <p class="detail-info" style="text-align: justify; font-size: revert; padding: 20px;"><strong>Доставка</strong>:
+              Доставка заказов осуществляется по адресу проживания,
+              адресу почтового отделения или другому адресу в России.
+              В связи с ограничениями по транспортировке некоторые косметические продукты
+              не доставляются в регионы, для доставки заказов в которые требуется
+              использование воздушного транспорта. <strong>Оплата</strong>:
+              Заказ оплачивается наличными или кредитной/дебетовой картой при получении.
+              Просьба принять во внимание, что в некоторых случаях транспортная компания,
+              доставляющая заказы, принимает наложенный платеж только наличными
+              (оплата банковской картой не принимается).</p>
+          </div>
+          <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="history">
+            <button onclick="w3_close_history()" class="w3-bar-item w3-large">История товара &times;</button>
+            <p class="detail-info">Мы считаем, что повышение прозрачности поможет в будущем сделать моду
+              более экологичной. В рамках наших долгосрочных инициатив мы делимся информацией о том, каким
+              образом и где создаются наши товары. </p>
+            <p class="main-detail">МАТЕРИАЛЫ</p>
+            <p class="detail-info">Наша цель к 2030 году использовать на 100% переработанные материалы или
+              материалы из экологичных источников.<br>
+            {{ get_item.materials }}</p>
+            <p class="main-detail">НАШИ ПОСТАВЩИКИ</p>
+            <p class="detail-info">Этот товар произведён в одной из следующих стран: <br>
+              {{ get_item.country_create }}</p>
+          </div>
+          <div class="w3-teal">
+            <button class="w3-button w3-teal w3-xlarge" onclick="w3_open_detail()">
+              <img src="{% static 'img/details.png'%}" width="auto" height="40"></button>
+            <button class="w3-button w3-teal w3-xlarge" onclick="w3_open_delivery()">
+              <img src="{% static 'img/delivery.png'%}" width="auto" height="40"></button>
+            <button class="w3-button w3-teal w3-xlarge" onclick="w3_open_history()">
+              <img src="{% static 'img/history.png'%}" width="auto" height="40"></button>
+          </div>
+        </div>
+        <div class="information-body d-flex">
+          <img class="ms-1 my-2"
+               src="{% if get_item.image %}{{ get_item.image.url }}{% else %}#{% endif %}" width="680">
+        </div>
+      </div>
+      <div class="buy-info mx-2">
+        <h3 style="text-align: center;"> {{ get_item.name }}</h3>
+        <div class="images d-flex flex-wrap justify-content-center">
+          <!-- Associated items if collection exist -->
+          {% if item_collection %}
+          {% for i in item_collection %}
+          <a href="{% url 'detail_items' i.pk %}"><img class="px-1 py-1" src="{% if i.image %}
+          {{ i.image.url }}{% else %}#{% endif %}"
+                           height="200" width="auto"></a>
+          {% endfor %}
+          {% endif %}
+        </div>
+        <h3 class="my-4" style="text-align: center;"> {{ get_item.color }}</h3>
+        <h3 class="my-4" style="text-align: center;"> {{ get_item.price }} RUB</h3>
+        {% endif %}
+        {% endblock %}
+        <div class="container-fluid" style="text-align: center;">
+          <div class="container-fluid" style="text-align: center;">
+            <!-- Form for add Item to Cart objects -->
+            <form method="post" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
+              {{ cart_form.name }}
+              {{ cart_form.price }}
+              {{ cart_form.color }}
+              <div class="dropdown my-3" style="text-align: center;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonDetail"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                  Размер
+                </button>
+                <ul class="dropdown-menu" id="Dropdown" aria-labelledby="dropdownMenuButtonDetail">
+                  {% if get_item.size_xs == True %}
+                  <li><a class="dropdown-item" href="#"><p class="XS">XS</p> {{ cart_form.size_xs|default:"False" }}
+                  </a></li>
+                  {% endif %}
+                  {% if get_item.size_s == True %}
+                  <li><a class="dropdown-item" href="#"><p class="S">S</p> {{ cart_form.size_s }}</a></li>
+                  {% endif %}
+                  {% if get_item.size_m == True %}
+                  <li><a class="dropdown-item" href="#"><p class="M">M</p> {{ cart_form.size_m }}</a></li>
+                  {% endif %}
+                  {% if get_item.size_l == True %}
+                  <li><a class="dropdown-item" href="#"><p class="L">L</p> {{ cart_form.size_l }}</a></li>
+                  {% endif %}
+                  {% if get_item.size_xl == True %}
+                  <li><a class="dropdown-item" href="#"><p class="XL">XL</p> {{ cart_form.size_xl }}</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+              {{ cart_form.image }}
+              <button type="submit" class="btn btn-dark my-4 mx-4">Добавить в корзину</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="p-3 mt-2 mx-2 rounded" style="background-color: #000000;">
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="{% static 'img/main-hacker.png'%}" alt="" width="auto" height="100">
+            <small class="d-block mb-3 text-muted">Created by Ilya Shtoler</small>
+          </div>
+          <div class="col-6 col-md">
+            <h5 class="pb-3" style="color: #fff;">Ссылки</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="link-footer" href="#">GitHub</a></li>
+              <li><a class="link-footer" href="#">Facebook</a></li>
+              <li><a class="link-footer" href="#">Linkedin</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
+
+	<!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+          integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+          crossorigin="anonymous"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+  <script src="{% static 'js/main.js'%}"></script>
+  <!-- Scripts for Dropdowns (close a Size window) -->
+  <script>
+    window.onclick = function(event) {
+        if (!event.target.matches('#dropdownMenuButtonDetail')) {
+
+            var dropdowns = document.getElementsByClassName("dropdown-menu");
+
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+  </script>
+  <!-- Scripts for Sizes (all of them disabled, and when u click dropdown close and one of them choosing -->
+  <script>
+    document.getElementById("id_size_xs").checked = false;
+    document.getElementById("id_size_s").checked = false;
+    document.getElementById("id_size_m").checked = false;
+    document.getElementById("id_size_l").checked = false;
+    document.getElementById("id_size_xl").checked = false;
+  </script>
+
+</body>
+</html>
